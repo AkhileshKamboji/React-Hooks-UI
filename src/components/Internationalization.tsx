@@ -17,6 +17,10 @@ const Internationalization = () => {
 
   const [language, setLanguage] = useState("en");
 
+  const arr = t("arrayJoin", { returnObjects: true });
+
+  console.log(arr);
+
   return (
     <div>
       <div
@@ -47,6 +51,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -57,6 +62,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -68,6 +74,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -78,6 +85,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -88,6 +96,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -98,6 +107,7 @@ const Internationalization = () => {
         <Card
           style={{
             padding: "16px",
+            margin: "8px",
             borderRadius: "10px",
             fontSize: "16px",
             width: "50%",
@@ -107,6 +117,42 @@ const Internationalization = () => {
           <div>0:{t("key", { count: 0 })}</div>
           <div>1:{t("key", { count: 1 })}</div>
           <div>2:{t("key", { count: 2 })}</div>
+        </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Nesting: '{t("nesting1")}'
+        </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Context:
+          <div>{t("friend")}</div>
+          <div>{t("friend", { context: "male" })}</div>
+          <div>{t("friend", { context: "female" })}</div>
+        </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Array joining:'{t("arrayJoin", { joinArrays: "+" })}'
         </Card>
       </div>
       <hr />
