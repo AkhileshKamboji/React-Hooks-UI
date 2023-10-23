@@ -154,6 +154,86 @@ const Internationalization = () => {
         >
           Array joining:'{t("arrayJoin", { joinArrays: "+" })}'
         </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Currency Formatting:
+          <div>
+            {t("intlCurrencyWithOptions", {
+              val: 20000000,
+              currency: "INR",
+              locale: "en-In",
+            })}{" "}
+            in INR
+          </div>
+          <div>
+            {t("intlCurrencyWithOptions", {
+              val: 20000000,
+              currency: "USD",
+              locale: "en-us",
+            })}{" "}
+            in USD
+          </div>
+          <div>
+            {t("intlCurrencyWithOptions", {
+              val: 20000000,
+              currency: "CAD",
+              locale: "fr-CA",
+              //de-DE for german
+              //ar-EG for arabic
+              //zh-Hans-CN-u-nu-hanidec for chinnese
+            })}{" "}
+            in CAD
+          </div>
+        </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Date Formatting:
+          <div>
+            {t("intlDateTime", {
+              val: new Date(Date.UTC(2012, 11, 20, 3, 0, 0)),
+              formatParams: {
+                val: {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                },
+              },
+            })}
+          </div>
+          <div>
+            {t("intlDateTime", {
+              val: new Date(Date.UTC(2012, 11, 20, 3, 0, 0)),
+              locale: "en-GB",
+            })}
+          </div>
+        </Card>
+        <Card
+          style={{
+            padding: "16px",
+            margin: "8px",
+            borderRadius: "10px",
+            fontSize: "16px",
+            width: "50%",
+          }}
+        >
+          Time Formatting:'
+          {t("intlRelativeTimeWithOptions", { val: 20 })}'
+        </Card>
       </div>
       <hr />
     </div>

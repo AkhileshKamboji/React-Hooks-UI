@@ -13,6 +13,7 @@ const components = [
   "MaterialUI",
   "LeoUI",
   "Internationalization",
+  "Blog",
 ];
 
 const Home = () => {
@@ -47,9 +48,9 @@ const Home = () => {
                   textAlign: "center",
                 }}
               >
-                {ele.endsWith("UI")
-                  ? ele
-                  : ele === "Internationalization"
+                {ele.endsWith("UI") ||
+                ele === "Internationalization" ||
+                ele === "Blog"
                   ? ele
                   : "use" + ele}
               </Card>
