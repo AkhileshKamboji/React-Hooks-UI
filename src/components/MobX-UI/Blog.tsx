@@ -53,10 +53,14 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
               <p
                 style={{
                   height: "200px",
-                  overflow: "hidden",
                   padding: "0px",
                   margin: "0px",
                   marginBottom: "16px",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 6,
+                  WebkitBoxOrient: "vertical",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
                 }}
               >
                 {blog.body}
