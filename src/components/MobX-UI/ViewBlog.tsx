@@ -1,7 +1,10 @@
 import { BlogModel, BlogView } from "../../MobX/BlogStore";
+import { TempView } from "../../MobX/TempStore";
 import { Instance } from "mobx-state-tree";
 import { Button, TextInputField } from "@surya-digital/leo-reactjs-material-ui";
 import { observer } from "mobx-react";
+import EditIcon from "@mui/icons-material/Edit";
+import { EditCommentDialog } from "./EditComment";
 
 const ViewBlog = observer(() => {
   const blogData: Instance<typeof BlogModel> = BlogView.selectedBlog;
@@ -12,17 +15,33 @@ const ViewBlog = observer(() => {
         <p>{blogData.body}</p>
         <h4>Comments</h4>
         <ul>
-          {blogData.comments.map((comment) => {
-            return <li key={comment}>{comment}</li>;
+          {blogData.comments.map((comment, index) => {
+            return (
+              <li key={index}>
+                <p style={{ display: "inline" }}>{comment}</p>{" "}
+                <EditIcon
+                  onClick={() => {
+                    TempView.setShowEditComment(!TempView.showEditComment);
+                  }}
+                />
+                {TempView.showEditComment && (
+                  <EditCommentDialog
+                    blogData={blogData}
+                    index={index}
+                    comment={comment}
+                  />
+                )}
+              </li>
+            );
           })}
         </ul>
         <div>
           <TextInputField
             name="adding a comment"
-            value={blogData.tempComment === null ? "" : blogData.tempComment}
+            value={TempView.tempComment === null ? "" : TempView.tempComment}
             type="text"
             onTextChange={(value) => {
-              blogData.setTempComment(value);
+              TempView.setTempComment(value);
             }}
             label="New comment..."
             style={{ margin: "8px" }}
@@ -33,11 +52,11 @@ const ViewBlog = observer(() => {
             title="Add"
             onClick={() => {
               if (
-                blogData.tempComment !== "" &&
-                blogData.tempComment !== null
+                TempView.tempComment !== "" &&
+                TempView.tempComment !== null
               ) {
-                blogData.addComment(blogData.tempComment);
-                blogData.setTempComment(null);
+                blogData.addComment(TempView.tempComment);
+                TempView.setTempComment(null);
               } else alert("Please enter something!");
             }}
             variant="filled"
