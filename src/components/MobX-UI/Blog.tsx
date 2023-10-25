@@ -1,30 +1,9 @@
 import { observer } from "mobx-react";
 import { BlogView, BlogsController } from "../../MobX/BlogStore";
 import { Button, Card } from "@surya-digital/leo-reactjs-material-ui";
-import {
-  Instance,
-  getSnapshot,
-  onAction,
-  onPatch,
-  onSnapshot,
-} from "mobx-state-tree";
+import { Instance } from "mobx-state-tree";
+
 import { useNavigate } from "react-router-dom";
-
-onSnapshot(BlogView, (snapshot) => {
-  console.log("via onSnapshot", snapshot.blogs);
-});
-
-console.log("via getSnapshot", getSnapshot(BlogView));
-//apply snapshot applies the snapshot passed into the tree
-
-onPatch(BlogView, (patch) => {
-  console.info("Got change: ", patch);
-});
-
-onAction(BlogView, (call) => {
-  console.info("Action was called:", call);
-});
-
 const Blog = observer(() => {
   return (
     <div>
