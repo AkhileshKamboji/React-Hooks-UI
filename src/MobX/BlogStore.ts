@@ -8,7 +8,7 @@ const BlogModel = types
     body: types.string,
     title: types.string,
     comments: types.array(types.string),
-    tempComment: types.string,
+    tempComment: types.maybeNull(types.string),
   })
   .actions((self) => ({
     setTitle(title: string) {
@@ -17,7 +17,7 @@ const BlogModel = types
     addComment(comment: string) {
       self.comments.push(comment);
     },
-    setTempComment(tempComment: string) {
+    setTempComment(tempComment: string | null) {
       self.tempComment = tempComment;
     },
   }));
@@ -40,7 +40,6 @@ const BlogsController = types
           body,
           title,
           comments: [],
-          tempComment: "",
         })
       );
     },

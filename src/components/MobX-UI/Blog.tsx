@@ -8,7 +8,7 @@ const Blog = observer(() => {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Welcome to blogs</h1>
-      <BlogContainer1 store={BlogView} />
+      <BlogContainer store={BlogView} />
     </div>
   );
 });
@@ -17,7 +17,7 @@ interface BlogsProps {
   store: Instance<typeof BlogsController>;
 }
 
-const BlogContainer1 = observer(({ store }: BlogsProps) => {
+const BlogContainer = observer(({ store }: BlogsProps) => {
   let navigate = useNavigate();
   return (
     <div>

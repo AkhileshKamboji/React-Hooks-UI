@@ -19,7 +19,7 @@ const ViewBlog = observer(() => {
         <div>
           <TextInputField
             name="adding a comment"
-            value={blogData.tempComment}
+            value={blogData.tempComment === null ? "" : blogData.tempComment}
             type="text"
             onTextChange={(value) => {
               blogData.setTempComment(value);
@@ -32,9 +32,12 @@ const ViewBlog = observer(() => {
             size="medium"
             title="Add"
             onClick={() => {
-              if (blogData.tempComment !== "") {
+              if (
+                blogData.tempComment !== "" &&
+                blogData.tempComment !== null
+              ) {
                 blogData.addComment(blogData.tempComment);
-                blogData.setTempComment("");
+                blogData.setTempComment(null);
               } else alert("Please enter something!");
             }}
             variant="filled"
