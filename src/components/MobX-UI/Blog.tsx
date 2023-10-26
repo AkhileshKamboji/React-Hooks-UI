@@ -4,6 +4,9 @@ import { Button, Card } from "@surya-digital/leo-reactjs-material-ui";
 import { Instance } from "mobx-state-tree";
 
 import { useNavigate } from "react-router-dom";
+import { TempView } from "../../MobX/TempStore";
+import { CreateBlogDialog } from "./CreateBlog";
+
 const Blog = observer(() => {
   return (
     <div>
@@ -96,12 +99,11 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
             marginBottom: "32px",
           }}
           onClick={() => {
-            store.addBlog(
-              `The Israel Defence Forces have posted an update to X saying: “During the night, fighter jets attacked over a hundred operational targets of the terrorist organizations in the Gaza Strip, destroying tunnel shafts, munitions warehouses and dozens of operational headquarters. During the attacks, the IDF and the Shin Bet eliminated a terrorist who was in the naval force of the terrorist organization Hamas, the terrorist took part in the murderous terrorist operations in the Gaza Strip.”The IDF said that “a terrorist squad associated with the terrorist organization’s air force that planned to launch missiles at an aircraft was foiled”.People at the scene of destruction after an Israeli attack on the Greek Orthodox church in Gaza City, 20 October 2023.People at the scene of destruction after an Israeli attack on the Greek Orthodox church in Gaza City, 20 October 2023. Photograph: Anadolu Agency/Anadolu/Getty Images Updated at 09.55 BST`,
-              "Israel-Hamas war"
-            );
+            TempView.setShowCreateBlog(!TempView.showCreateBlog);
+            console.log(TempView.showCreateBlog);
           }}
         />
+        {TempView.showCreateBlog && <CreateBlogDialog />}
       </div>
     </div>
   );

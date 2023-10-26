@@ -4,6 +4,7 @@ export const TempModel = types
   .model({
     tempComment: types.maybeNull(types.string),
     showEditComment: false,
+    showCreateBlog: false,
   })
   .actions((self) => ({
     setTempComment(tempComment: string | null) {
@@ -12,8 +13,9 @@ export const TempModel = types
     setShowEditComment(bool: boolean) {
       self.showEditComment = bool;
     },
+    setShowCreateBlog(bool: boolean) {
+      self.showCreateBlog = bool;
+    },
   }));
 
-export const TempView = TempModel.create({
-  showEditComment: false,
-});
+export const TempView = TempModel.create({});
