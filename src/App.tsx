@@ -14,6 +14,8 @@ import { ThemeConfig } from "@surya-digital/leo-reactjs-material-ui";
 import typographyStyles from "./Theme/Typography";
 import lightColorPalette from "./Theme/LightColorPalette";
 import Internationalization from "./components/Internationalization";
+import Blog from "./components/MobX-UI/Blog";
+import ViewBlog from "./components/MobX-UI/ViewBlog";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
               path="/Internationalization"
               element={<Internationalization />}
             />
+            <Route path="/Blog" element={<Blog />} />
+            <Route path="/ViewBlog" element={<ViewBlog />} />
           </Routes>
         </Router>
       </ThemeConfig>
