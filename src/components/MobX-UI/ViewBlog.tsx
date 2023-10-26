@@ -1,24 +1,40 @@
 import { BlogModel, BlogView } from "../../MobX/BlogStore";
 import { TempView } from "../../MobX/TempStore";
 import { Instance } from "mobx-state-tree";
-import { Button, TextInputField } from "@surya-digital/leo-reactjs-material-ui";
+import {
+  Button,
+  TextInputField,
+  useTypography,
+} from "@surya-digital/leo-reactjs-material-ui";
 import { observer } from "mobx-react";
 import EditIcon from "@mui/icons-material/Edit";
 import { EditCommentDialog } from "./EditComment";
+import { Box, List, ListItem, Typography } from "@mui/material";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 const ViewBlog = observer(() => {
   const blogData: Instance<typeof BlogModel> = BlogView.selectedBlog;
+  const typography = useTypography();
   return (
-    <div>
-      <div style={{ margin: "32px" }}>
-        <h1 style={{ textAlign: "center" }}>{blogData.title}</h1>
-        <p>{blogData.body}</p>
-        <h4>Comments</h4>
-        <ul>
+    <Box>
+      <Box style={{ margin: "32px" }}>
+        <Typography sx={{ ...typography.h3, textAlign: "center" }}>
+          {blogData.title}
+        </Typography>
+        <Typography sx={{ ...typography.body1, marginBottom: "16px" }}>
+          {blogData.body}
+        </Typography>
+        <Typography sx={{ ...typography.sh1 }}>Comments</Typography>
+        <List>
           {blogData.comments.map((comment, index) => {
             return (
-              <li key={index}>
-                <p style={{ display: "inline" }}>{comment}</p>{" "}
+              <ListItem key={index}>
+                <FiberManualRecordIcon style={{ padding: "4px" }} />
+                <Typography
+                  sx={{ ...typography.sh3, fontWeight: 400, display: "inline" }}
+                >
+                  {comment}
+                </Typography>{" "}
                 <EditIcon
                   onClick={() => {
                     TempView.setShowEditComment(!TempView.showEditComment);
@@ -31,11 +47,11 @@ const ViewBlog = observer(() => {
                     comment={comment}
                   />
                 )}
-              </li>
+              </ListItem>
             );
           })}
-        </ul>
-        <div>
+        </List>
+        <Box>
           <TextInputField
             name="adding a comment"
             value={TempView.tempComment === null ? "" : TempView.tempComment}
@@ -62,9 +78,9 @@ const ViewBlog = observer(() => {
             variant="filled"
             style={{ margin: "8px" }}
           />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 });
 

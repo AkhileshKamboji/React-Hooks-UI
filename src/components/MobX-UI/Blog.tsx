@@ -1,18 +1,25 @@
 import { observer } from "mobx-react";
 import { BlogView, BlogsController } from "../../MobX/BlogStore";
-import { Button, Card } from "@surya-digital/leo-reactjs-material-ui";
+import {
+  Button,
+  Card,
+  useTypography,
+} from "@surya-digital/leo-reactjs-material-ui";
 import { Instance } from "mobx-state-tree";
-
 import { useNavigate } from "react-router-dom";
 import { TempView } from "../../MobX/TempStore";
 import { CreateBlogDialog } from "./CreateBlog";
+import { Box, Typography } from "@mui/material";
 
 const Blog = observer(() => {
+  const typography = useTypography();
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Welcome to blogs</h1>
+    <Box style={{ margin: "32px" }}>
+      <Typography sx={{ ...typography.h3, textAlign: "center" }}>
+        Welcome to blogs
+      </Typography>
       <BlogContainer store={BlogView} />
-    </div>
+    </Box>
   );
 });
 
@@ -22,9 +29,10 @@ interface BlogsProps {
 
 const BlogContainer = observer(({ store }: BlogsProps) => {
   let navigate = useNavigate();
+  const typography = useTypography();
   return (
-    <div>
-      <div
+    <Box>
+      <Box
         style={{
           display: "flex",
           justifyContent: "space-around",
@@ -44,17 +52,18 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
                 margin: "16px",
               }}
             >
-              <h2
-                style={{
-                  height: "30px",
+              <Typography
+                sx={{
+                  ...typography.h5,
                   overflow: "hidden",
                   textAlign: "center",
                 }}
               >
                 {blog.title}
-              </h2>
-              <p
-                style={{
+              </Typography>
+              <Typography
+                sx={{
+                  ...typography.body1,
                   height: "200px",
                   padding: "0px",
                   margin: "0px",
@@ -67,7 +76,7 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
                 }}
               >
                 {blog.body}
-              </p>
+              </Typography>
               <Button
                 name="view"
                 title="View"
@@ -86,8 +95,8 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
             </Card>
           );
         })}
-      </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      </Box>
+      <Box style={{ display: "flex", justifyContent: "center" }}>
         <Button
           name="add blog"
           title="Create a blog"
@@ -104,8 +113,8 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
           }}
         />
         {TempView.showCreateBlog && <CreateBlogDialog />}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 });
 
