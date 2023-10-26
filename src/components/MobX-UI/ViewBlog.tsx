@@ -11,10 +11,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import { EditCommentDialog } from "./EditComment";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { useTranslation } from "react-i18next";
 
 const ViewBlog = observer(() => {
   const blogData: Instance<typeof BlogModel> = BlogView.selectedBlog;
   const typography = useTypography();
+  const { t } = useTranslation();
   return (
     <Box>
       <Box style={{ margin: "32px" }}>
@@ -24,7 +26,7 @@ const ViewBlog = observer(() => {
         <Typography sx={{ ...typography.body1, marginBottom: "16px" }}>
           {blogData.body}
         </Typography>
-        <Typography sx={{ ...typography.sh1 }}>Comments</Typography>
+        <Typography sx={{ ...typography.sh1 }}>{t("Comments")}</Typography>
         <List>
           {blogData.comments.map((comment, index) => {
             return (
@@ -53,19 +55,19 @@ const ViewBlog = observer(() => {
         </List>
         <Box>
           <TextInputField
-            name="adding a comment"
+            name={t("NewComment")}
             value={TempView.tempComment === null ? "" : TempView.tempComment}
             type="text"
             onTextChange={(value) => {
               TempView.setTempComment(value);
             }}
-            label="New comment..."
+            label={t("NewComment")}
             style={{ margin: "8px" }}
           />
           <Button
-            name="add comment"
+            name={t("NewComment")}
             size="medium"
-            title="Add"
+            title={t("Add")}
             onClick={() => {
               if (
                 TempView.tempComment !== "" &&
@@ -73,7 +75,7 @@ const ViewBlog = observer(() => {
               ) {
                 blogData.addComment(TempView.tempComment);
                 TempView.setTempComment(null);
-              } else alert("Please enter something!");
+              } else alert(t("EmptyCommentAlert"));
             }}
             variant="filled"
             style={{ margin: "8px" }}

@@ -3,6 +3,7 @@ import { Instance } from "mobx-state-tree";
 import { useState } from "react";
 import { BlogModel } from "../../MobX/BlogStore";
 import { TempView } from "../../MobX/TempStore";
+import { useTranslation } from "react-i18next";
 
 interface EditCommentDialogInterface {
   blogData: Instance<typeof BlogModel>;
@@ -16,6 +17,7 @@ export const EditCommentDialog = ({
   comment,
 }: EditCommentDialogInterface) => {
   const [newComment, setNewComment] = useState(comment);
+  const { t } = useTranslation();
   return (
     <Dialog
       open={TempView.showEditComment}
@@ -23,9 +25,9 @@ export const EditCommentDialog = ({
         TempView.setShowEditComment(false);
         TempView.setTempComment(null);
       }}
-      title="Edit the Comment"
-      primaryButtonText="Confirm"
-      secondaryButtonText="Cancel"
+      title={t("EditTheComment")}
+      primaryButtonText={t("Confirm")}
+      secondaryButtonText={t("Cancel")}
       onPrimaryButtonClick={(): Promise<void> => {
         return new Promise((resolve) => {
           resolve(blogData.editComment(index, newComment));
@@ -41,14 +43,14 @@ export const EditCommentDialog = ({
       isCloseIconPresent={true}
     >
       <TextInputField
-        name="newComment"
+        name={t("EditComment")}
         value={newComment}
         type="text"
         onTextChange={(e) => {
           setNewComment(e);
         }}
-        placeholder="Edit Comment"
-        label="Edit Comment"
+        placeholder={t("EditComment")}
+        label={t("EditComment")}
       />
     </Dialog>
   );

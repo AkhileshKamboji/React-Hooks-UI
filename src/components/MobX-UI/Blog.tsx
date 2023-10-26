@@ -10,13 +10,15 @@ import { useNavigate } from "react-router-dom";
 import { TempView } from "../../MobX/TempStore";
 import { CreateBlogDialog } from "./CreateBlog";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Blog = observer(() => {
   const typography = useTypography();
+  const { t } = useTranslation();
   return (
     <Box style={{ margin: "32px" }}>
       <Typography sx={{ ...typography.h3, textAlign: "center" }}>
-        Welcome to blogs
+        {t("WelcomeTitle")}
       </Typography>
       <BlogContainer store={BlogView} />
     </Box>
@@ -30,6 +32,7 @@ interface BlogsProps {
 const BlogContainer = observer(({ store }: BlogsProps) => {
   let navigate = useNavigate();
   const typography = useTypography();
+  const { t } = useTranslation();
   return (
     <Box>
       <Box
@@ -78,8 +81,8 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
                 {blog.body}
               </Typography>
               <Button
-                name="view"
-                title="View"
+                name={t("view")}
+                title={t("view")}
                 onClick={() => {
                   BlogView.setSelectedBlog(blog);
                   navigate("/ViewBlog");
@@ -98,8 +101,8 @@ const BlogContainer = observer(({ store }: BlogsProps) => {
       </Box>
       <Box style={{ display: "flex", justifyContent: "center" }}>
         <Button
-          name="add blog"
-          title="Create a blog"
+          name={t("CreateBlog")}
+          title={t("CreateBlog")}
           variant="filled"
           size="large"
           style={{
